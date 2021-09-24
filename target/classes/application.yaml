@@ -6,7 +6,7 @@ spring:
     active:
       - ${APPLICATION_SPRING_PROFILE:dev}
   application:
-    name: demo-service
+    name: spring-service
 ---
 
 spring:
