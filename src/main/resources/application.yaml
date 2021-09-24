@@ -1,0 +1,13 @@
+server:
+  port: 8091
+
+spring:
+  profiles:
+    active:
+      - ${APPLICATION_SPRING_PROFILE:dev}
+  application:
+    name: spring-service
+---
+
+spring:
+  profiles: dev

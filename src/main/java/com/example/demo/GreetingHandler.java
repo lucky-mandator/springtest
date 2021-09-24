@@ -11,9 +11,19 @@ import java.util.Optional;
 
 @Component
 public class GreetingHandler {
-    public Mono<ServerResponse> hello(ServerRequest request) {
-        Optional<Object> name = request.attribute("name");
-        return ServerResponse.ok().contentType(MediaType.APPLICATION_JSON)
-                .body(BodyInserters.fromValue(new Greeting("Hello Spring!")));
+
+    private final SayGreeting sayGreeting;
+
+    public GreetingHandler(SayGreeting sayGreeting){
+        this.sayGreeting = sayGreeting;
     }
+
+    public Mono<ServerResponse> hello(ServerRequest request) {
+        Optional<Object> nameObj = request.attribute("name");
+        String name = request.pathVariable("name");
+        System.out.println(name);
+        return ServerResponse.ok().contentType(MediaType.APPLICATION_JSON)
+                .body(BodyInserters.fromValue(sayGreeting.sayHello(name)));
+    }
+    //BodyInserters.fromValue(new Greeting("Hello Spring!"))
 }
